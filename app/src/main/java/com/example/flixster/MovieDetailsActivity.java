@@ -3,6 +3,7 @@ package com.example.flixster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.flixster.models.Movie;
 
@@ -19,6 +20,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_details);
 
         //Unwrap the movie passed in via intent, using its simple name as a key
-        movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
+        movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
+        Log.d("MovieDetailActivity", "Showing details for " + movie.getTitle());
     }
 }
