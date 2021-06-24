@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.flixster.models.Movie;
 
@@ -14,13 +16,32 @@ public class MovieDetailsActivity extends AppCompatActivity {
     //Movie to display
     Movie movie;
 
+    //View Objects
+    TextView tvTitle;
+    TextView tvOverview;
+    RatingBar rbVoteAverage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
+        tvTitle = findViewById(R.id.tvDetailTitle);
+        tvOverview = findViewById(R.id.tvDetailOverview);
+        rbVoteAverage = findViewById(R.id.rbVoteAverage);
+
         //Unwrap the movie passed in via intent, using its simple name as a key
         movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
         Log.d("MovieDetailActivity", "Showing details for " + movie.getTitle());
+
+        //vote average is 0..10, convert to 0..5 by dividing by 2
+        float voteAverage = movie.getVoteAverage().floatValue();
+        rbVoteAverage.setRating(voteAverage / 2.0f);
+
+        //Set Title text
+        tvTitle.setText(movie.getTitle());
+
+        //Set overview
+        tvOverview.setText(movie.getOverview());
     }
 }

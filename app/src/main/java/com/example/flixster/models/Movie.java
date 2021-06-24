@@ -19,6 +19,7 @@ public class Movie {
     String backdropPath;
     String title;
     String overview;
+    Double voteAverage;
 
     //Empty constructor required for parser
     public Movie() {}
@@ -29,6 +30,7 @@ public class Movie {
         backdropPath = jsonObject.getString("backdrop_path");
         title = jsonObject.getString("original_title");
         overview = jsonObject.getString("overview");
+        voteAverage = jsonObject.getDouble("vote_average");
     }
 
     //Gets a json array and creates a list of movie objects with each object in the array
@@ -55,5 +57,9 @@ public class Movie {
 
     public String getBackdropPath() {
         return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
+    }
+
+    public Double getVoteAverage() {
+        return voteAverage;
     }
 }
