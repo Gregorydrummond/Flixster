@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.flixster.models.Movie;
 
 import org.parceler.Parcels;
@@ -20,6 +23,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvTitle;
     TextView tvOverview;
     RatingBar rbVoteAverage;
+    ImageView ivBackdrop;
+    ImageView ivPoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +34,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tvDetailTitle);
         tvOverview = findViewById(R.id.tvDetailOverview);
         rbVoteAverage = findViewById(R.id.rbVoteAverage);
+        ivBackdrop = findViewById(R.id.ivDetailBackdrop);
+        ivPoster = findViewById(R.id.ivDetailPoster);
 
         //Unwrap the movie passed in via intent, using its simple name as a key
         movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
@@ -43,5 +50,18 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         //Set overview
         tvOverview.setText(movie.getOverview());
+
+        //Set backdrop image
+        Glide.with(this)
+                .load(movie.getBackdropPath())
+                .override(1080)
+                .into(ivBackdrop);
+
+        //Set poster image
+        Glide.with(this)
+                .load(movie.getPosterPath())
+                .transform(new CircleCrop())
+                .override(300)
+                .into(ivPoster);
     }
 }
