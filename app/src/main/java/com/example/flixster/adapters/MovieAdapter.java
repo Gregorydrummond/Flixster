@@ -81,15 +81,35 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             //If phone is in landscape
             if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageUrl = movie.getBackdropPath();
+                //If the image url is empty, use a placeholder
+                if(imageUrl.isEmpty()) {
+                    Glide.with(context)
+                            .load(R.drawable.flicks_movie_placeholder)
+                            .into(poster);
+                }
+                //Else use the image url => backdrop path
+                else {
+                    Glide.with(context)
+                            .load(imageUrl)
+                            .into(poster);
+                }
+
             }
             else {
                 imageUrl = movie.getPosterPath();
+                //If the image url is empty, use a placeholder
+                if(imageUrl.isEmpty()) {
+                    Glide.with(context)
+                            .load(R.drawable.flicks_movie_placeholder)
+                            .into(poster);
+                }
+                //Else use the image url => poster path
+                else {
+                    Glide.with(context)
+                            .load(imageUrl)
+                            .into(poster);
+                }
             }
-
-            Glide.with(context)
-                    .load(imageUrl)
-                    .placeholder(R.drawable.flicks_movie_placeholder)
-                    .into(poster);
         }
 
         //Open MovieDetailsActivity Screen for selected View movie
