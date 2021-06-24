@@ -84,7 +84,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 //If the image url is empty, use a placeholder
                 if(imageUrl.isEmpty()) {
                     Glide.with(context)
-                            .load(R.drawable.flicks_movie_placeholder)
+                            .load(R.drawable.flicks_backdrop_placeholder)
                             .into(poster);
                 }
                 //Else use the image url => backdrop path
