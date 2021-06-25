@@ -23,7 +23,6 @@ import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=59a6d3cd474e593181e0554b4cd2c8b9";
     public static final String TAG = "MainActivity";
 
     //5 Create list of movies (Uses method from  movie class to populate)
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
 
         //Get data from client using url
-        client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() {
+        client.get(getString(R.string.now_playing_url), new JsonHttpResponseHandler() {
             @Override
             //Handles a successful return
             public void onSuccess(int i, Headers headers, JSON json) {

@@ -20,6 +20,7 @@ public class Movie {
     String title;
     String overview;
     Double voteAverage;
+    int movieID;
 
     //Empty constructor required for parser
     public Movie() {}
@@ -31,6 +32,7 @@ public class Movie {
         title = jsonObject.getString("original_title");
         overview = jsonObject.getString("overview");
         voteAverage = jsonObject.getDouble("vote_average");
+        movieID = jsonObject.getInt("id");
     }
 
     //Gets a json array and creates a list of movie objects with each object in the array
@@ -61,5 +63,9 @@ public class Movie {
 
     public Double getVoteAverage() {
         return voteAverage;
+    }
+
+    public int getMovieID() {
+        return movieID;
     }
 }

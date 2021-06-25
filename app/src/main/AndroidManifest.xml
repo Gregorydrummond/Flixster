@@ -3,6 +3,12 @@
     package="com.example.flixster">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--I added this to get player to run-->
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START"/>
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -11,7 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Flixster">
-        <activity android:name=".MovieDetailsActivity"></activity>
+        <activity android:name=".MovieTrailerActivity"></activity>
+        <activity
+            android:name=".MovieDetailsActivity"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

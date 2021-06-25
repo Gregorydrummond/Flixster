@@ -2,8 +2,11 @@ package com.example.flixster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.example.flixster.models.Movie;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.parceler.Parcels;
 
@@ -25,6 +29,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     RatingBar rbVoteAverage;
     ImageView ivBackdrop;
     ImageView ivPoster;
+    FloatingActionButton btnPlay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         rbVoteAverage = findViewById(R.id.rbVoteAverage);
         ivBackdrop = findViewById(R.id.ivDetailBackdrop);
         ivPoster = findViewById(R.id.ivDetailPoster);
+        btnPlay = findViewById(R.id.btnPlay);
 
         //Unwrap the movie passed in via intent, using its simple name as a key
         movie = Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
@@ -63,5 +70,20 @@ public class MovieDetailsActivity extends AppCompatActivity {
                 .transform(new CircleCrop())
                 .override(300)
                 .into(ivPoster);
+    }
+
+    //When play button is clicked
+    public void onClick(View v) {
+        //Log.d("MD", "Movie ID: " + movie.getMovieID());
+        //Direct to movie trailer activity/screen
+        //Create intent
+        Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
+
+        //Wrap movie ID using parceler
+        intent.putExtra("MovieID", Parcels.wrap(movie.getMovieID()));
+
+        //Show Activity
+        MovieDetailsActivity.this.startActivity(intent);
+
     }
 }
