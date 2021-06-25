@@ -1,5 +1,6 @@
 package com.example.flixster;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -57,6 +58,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         //Set overview
         tvOverview.setText(movie.getOverview());
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         //Set backdrop image
         Glide.with(this)
